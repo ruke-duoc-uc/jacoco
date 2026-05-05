@@ -1,0 +1,28 @@
+name: Build and Push Docker Image 
+
+on: 
+  push:
+    branches:
+      - main   
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: action/checkout@v4
+
+      - name: set up jdk17
+        uses: action/setup-java@v3
+
+      - name: package application
+        runs: mvm clean package -DkipTests
+      
+      - name: upload jar artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-jar
+          path: target/*.jar

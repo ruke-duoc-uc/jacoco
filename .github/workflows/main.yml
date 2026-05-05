@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
 
       - name: package application
-        run: mvm clean package -DkipTests
+        run: mvm clean package -DskipTests
       
       - name: upload jar artifact
         uses: actions/upload-artifact@v4
